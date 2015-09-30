@@ -45,3 +45,22 @@ Create an layout template
 Create an index
         create in index.handlebars file under views folder.
 Using Boostap
+ Step 1 : copy bootstrap under folder stylesheets
+ Step 2 : making a static file
+        create a lib folder
+        create a file static.js inside lib folder
+        change the configure of handlebars in app.js as below
+        var handlebars = require('express3-handlebars' )
+            .create({ defaultLayout: 'main',helpers: {
+              section: function(name, options){
+                if(!this._sections) this._sections = {};
+                this._sections[name] = options.fn(this);
+                return null;
+              },
+              static: function(name) {
+                return require('./lib/static.js').map(name);
+              }
+            } });
+  Step 3 : link css to main layout
+           open the layout file in views/main.handlebars
+           <link rel="stylesheet" href="{{static 'stylesheets/bootstrap/css/bootstrap.min.css'}}">
