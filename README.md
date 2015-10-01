@@ -7,7 +7,18 @@ Part I : Installation Environment
    Please install node from here https://nodejs.org/en/
 2) Install MongoDB
    Please install mongodb from here https://www.mongodb.org/downloads or  http://mongolab.com
+   Step 1 : create a database name airplane
+   Step 2 : create a collection flights
+   Step 3 : insert the data belows
+   {
 
+       "code" : "VN 126",
+       "name" : "Viet Nam AirLine",
+       "source" : "Ho Chi Minh",
+       "destination" : "Da Nang",
+       "time" : "11:00 am"
+   }
+3) Install the project
 Step 1 : Install global Express Generator
          npm install express-generator -g
 Step 2 : Generate Express
@@ -93,4 +104,32 @@ Creating Schemas and Models
         var Fight = mongoose.model('fight',fightSchema,"fight");
         module.exports = Fight;
 
-        Step 3 :
+        Step 3 : Modify the controller
+
+        router.get('/flights', function(req, res, next) {
+           Flights.find({},function(error,result){
+              if(error) console.log(error);
+              res.render('flights', { flights: result });
+          });
+
+        Step 4 : change flights.handlebars file
+        <table class="table">
+            <thead>
+            <th>Flight Number</th>
+            <th>Flight Name</th>
+            <th>Source</th>
+            <th>Destination</th>
+            </thead>
+            <tbody>
+            {{#flights}}
+                <tr>
+                    <td>{{code}}</td>
+                    <td>{{name}}</td>
+                    <td>{{source}}</td>
+                    <td>{{destination}}</td>
+                </tr>
+            {{/flights}}
+            </tbody>
+        </table>
+
+RUN THE APPLICATION : http://localhost:3000 to check the result
