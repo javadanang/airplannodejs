@@ -1,7 +1,7 @@
 var mongoose = require('mongoose')
     , Schema = mongoose.Schema
 
-var fightSchema = mongoose.Schema({
+var flightSchema = mongoose.Schema({
     code : String,
     name : String,
     source : String,
@@ -10,4 +10,5 @@ var fightSchema = mongoose.Schema({
 
 });
 
-var Fight = mongoose.model('fight',fightSchema,"fight");
+var Flights = mongoose.model('flights',flightSchema,"flights");
+module.exports = Flights;

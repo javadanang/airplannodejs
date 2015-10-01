@@ -1,0 +1,18 @@
+<table class="table">
+    <thead>
+    <th>Flight Number</th>
+    <th>Flight Name</th>
+    <th>Source</th>
+    <th>Destination</th>
+    </thead>
+    <tbody>
+    {{#flights}}
+        <tr>
+            <td>{{code}}</td>
+            <td>{{name}}</td>
+            <td>{{source}}</td>
+            <td>{{destination}}</td>
+        </tr>
+    {{/flights}}
+    </tbody>
+</table>
