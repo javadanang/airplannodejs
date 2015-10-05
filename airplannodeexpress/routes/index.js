@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 router.get('/flights', function(req, res, next) {
    Flights.find({},function(error,result){
       if(error) console.log(error);
-      res.render('flights', { flights: result });
+      res.render('flights', { pageTestScript: '/vendor/test-allfights.js',flights: result });
   });
 
 
