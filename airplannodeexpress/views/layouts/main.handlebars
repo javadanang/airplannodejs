@@ -9,6 +9,11 @@
 <link rel="stylesheet" href="{{static 'stylesheets/bootstrap/css/bootstrap.min.css'}}">
 <link rel="stylesheet" href="{{static 'stylesheets/adminLTE/AdminLTE.min.css'}}">
 <link rel="stylesheet" href="{{static 'stylesheets/adminLTE/_all-skins.min.css'}}">
+
+{{#if showTests}}
+    <link rel="stylesheet" href="vendor/mocha.css" >
+{{/if}}
+
 <body class="hold-transition skin-blue sidebar-mini" >
 
 <div class="wrapper">
@@ -72,9 +77,31 @@
             {{{body}}}
 
         </section><!-- right col -->
+
+        {{#if showTests}}
+
+            <div id="mocha"></div>
+            <script src="{{static '/vendor/mocha.js'}}"></script>
+            <script src="{{static '/vendor/chai.js'}}"></script>
+            <script>
+                mocha.ui('tdd');
+                var assert = chai.assert;
+            </script>
+            <script src="{{static '/vendor/tests-global.js'}}"></script>
+            {{#if pageTestScript}}
+                <script src="{{pageTestScript}}"></script>
+            {{/if}}
+            <script>mocha.run();</script>
+        {{/if}}
+
     </div><!-- /.row (main row) -->
 
+
     </section><!-- /.content -->
+
+
+
+
 </div><!-- /.content-wrapper -->
 <footer class="main-footer">
     <div class="pull-right hidden-xs">
@@ -82,6 +109,8 @@
     </div>
     <strong>Copyright &copy; 2014-2015 <a href="http://javadanang.com">Java Da Nang Community</a>.</strong> All rights reserved.
 </footer>
+
+
 
 </body>
 </html>

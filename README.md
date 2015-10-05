@@ -133,3 +133,48 @@ Creating Schemas and Models
         </table>
 
 RUN THE APPLICATION : http://localhost:3000 to check the result
+
+Testing our application with
+
+Page Testing
+
+Step 1 : install mocha
+npm install --save-dev mocha
+Step 2 : create an vendor folder inside the public folder and copy 2 files mocha.js and mocha.css
+Step 3 : Insert Assert library from chain
+npm install --save-dev chai
+Step 4 : copy file chai.js to vendor folder
+Step 5 : configure test url parameter in app.js
+app.use(function(req, res, next){
+  res.locals.showTests = app. get('env' ) !== 'production' &&
+      req. query. test === '1' ;
+  next();
+});
+Step 6 : create tests-global.js to test the page
+suite('Global Tests', function(){
+	test('page has a valid title', function(){
+		assert(document.title && document.title.match(/\S/) &&
+			document.title.toUpperCase() !== 'Air Plane');
+	});
+});
+Step 7 : change to display test in template file
+ {{#if showTests}}
+
+            <div id="mocha"></div>
+            <script src="{{static '/vendor/mocha.js'}}"></script>
+            <script src="{{static '/vendor/chai.js'}}"></script>
+            <script>
+                mocha.ui('tdd');
+                var assert = chai.assert;
+            </script>
+            <script src="{{static '/vendor/tests-global.js'}}"></script>
+            {{#if pageTestScript}}
+                <script src="{{pageTestScript}}"></script>
+            {{/if}}
+            <script>mocha.run();</script>
+        {{/if}}
+
+ Step 8 : run globle test
+ http://localhost:3000/?test=1
+
+

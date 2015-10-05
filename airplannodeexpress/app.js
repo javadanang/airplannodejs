@@ -46,6 +46,12 @@ mongoose.connect('mongodb://localhost:27017/airplane', function (error) {
   }
 });
 
+app.use(function(req, res, next){
+  res.locals.showTests = app. get('env' ) !== 'production' &&
+      req. query. test === '1' ;
+  next();
+});
+
 app.use('/', routes);
 app.use('/users', users);
 
