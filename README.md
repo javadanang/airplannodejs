@@ -178,3 +178,34 @@ Step 7 : change to display test in template file
  http://localhost:3000/?test=1
 
 
+Running specific test case
+Step 1 : inside folder vendor create a test-allfights.js to test the list all air plane page
+suite('All Flights Page Tests' , function(){
+    test('page should contain link to contact page' , function(){
+        assert($('a[href="/flights"]' ).length);
+
+    });
+});
+
+Step 2 : in the layout file enable pageTestScript
+{{#if pageTestScript}}
+                <script src="{{pageTestScript}}"></script>
+            {{/if}}
+
+
+Running Unitest
+Step 1 create a unit test file name tests-unit inside the qa folder
+var fortune = require('../lib/fortune.js');
+var expect = require('chai').expect;
+
+suite('Fortune cookie tests', function(){
+
+    test('getFortune() should return a fortune', function(){
+        expect(typeof fortune.getFortune() === 'string');
+    });
+
+});
+
+Step 2 : in the console run this command line
+mocha -u tdd -R spec qa/tests-unit.js
+
